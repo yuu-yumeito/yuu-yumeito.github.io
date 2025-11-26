@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>yumeito</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: linear-gradient(135deg, #fff9fd, #fafaff);
+      color: #5a5a5a;
+    }
+
+    header {
+      text-align: center;
+      padding: 48px 16px 28px;
+    }
+
+    .logo-img {
+      width: 220px;
+      max-width: 70vw;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(190, 150, 230, 0.28);
+      margin-bottom: 18px;
+    }
+
+    .site-title {
+      font-size: 2rem;
+      letter-spacing: 0.15em;
+      color: #b46ad9;
+      margin-bottom: 6px;
+      font-weight: 600;
+      text-transform: lowercase;
+    }
+
+    .site-subtitle {
+      font-size: 0.95rem;
+      color: #999;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 18px 48px;
+      display: grid;
+      gap: 28px;
+    }
+
+    @media (min-width: 750px) {
+      main {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffffcc;
+      border-radius: 20px;
+      padding: 24px 22px;
+      box-shadow: 0 8px 22px rgba(200, 180, 240, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      color: #b46ad9;
+      margin-bottom: 4px;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 9px 18px;
+      background: #f4ddff;
+      color: #9447c0;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(200, 170, 255, 0.35);
+      transition: all 0.12s ease;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(200, 170, 255, 0.45);
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 16px 32px;
+      font-size: 0.75rem;
+      color: #b3b3b3;
+    }
+
+    footer a {
+      color: #b46ad9;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- トップで使いたい家のイラストなど -->
+    <!-- 例: images/yumeito-home.png に置く -->
+    <img src="images/yumeito-home.png" alt="ゆめいと屋さんのような小さなお店" class="logo-img" />
+    <div class="site-title">yumeito</div>
+    <div class="site-subtitle">すこしふしぎで、すこしやさしいものづくり</div>
+  </header>
+
+  <main>
+    <!-- ゆめいと屋さん案内カード -->
+    <section class="card">
+      <h2>アプリ「ゆめいと屋さん」</h2>
+      <p>
+        パステルいろの“いと”たちがならぶ、小さなおりもの屋さん。  
+        すきないろの“ゆめいと”をあつめて、あなただけの“ゆめおり”を  
+        つくれる、Android アプリです。
+      </p>
+      <p>
+        ストアの情報・スクリーンショット・プライバシーポリシーは  
+        下のボタンからご覧いただけます。
+      </p>
+      <a href="yumeito-yasan.html" class="btn">「ゆめいと屋さん」をくわしく見る</a>
+    </section>
+
+    <!-- 作者 / 屋号についてカード -->
+    <section class="card">
+      <h2>about「yumeito」</h2>
+      <p>
+        「yumeito」は、クリエイター <strong>yuu</strong> がつかっている  
+        個人の制作名・屋号です。  
+        ひとりで、ゆっくり、たのしく、  
+        アプリやちいさなゲームなどを作っています。
+      </p>
+      <p>
+        まだ準備中のものもふくめ、  
+        運営や連絡さきなどの情報はこちらにまとめています。
+      </p>
+      <a href="about.html" class="btn">about / 運営情報</a>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> yumeito / yuu  
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+  </html>
