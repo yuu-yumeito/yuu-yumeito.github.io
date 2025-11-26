@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ゆめいと屋さん | yumeito</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: linear-gradient(135deg, #fff9fd, #fafaff);
+      color: #4f4f4f;
+    }
+
+    header {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 12px;
+    }
+
+    .back-link {
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    .back-link a {
+      color: #b46ad9;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 12px 0 8px;
+    }
+
+    .feature {
+      width: 100%;
+      max-width: 960px;
+      border-radius: 20px;
+      box-shadow: 0 8px 22px rgba(200, 180, 240, 0.25);
+      margin-bottom: 12px;
+    }
+
+    .app-title {
+      font-size: 1.7rem;
+      color: #b46ad9;
+      margin-bottom: 4px;
+    }
+
+    .app-subtitle {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px 48px;
+    }
+
+    section {
+      background: #ffffffcc;
+      border-radius: 18px;
+      padding: 20px 18px;
+      margin-top: 18px;
+      box-shadow: 0 6px 18px rgba(200, 180, 240, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      color: #b46ad9;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      margin-bottom: 0.8em;
+    }
+
+    .btn-store {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 9px 18px;
+      background: #18c15c;
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(24, 193, 92, 0.35);
+      transition: all 0.12s ease;
+      font-weight: 600;
+    }
+
+    .btn-store:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(24, 193, 92, 0.45);
+    }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .screenshots img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(190, 170, 230, 0.35);
+      background: #f4f4f9;
+    }
+
+    .policy-note {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px 16px 28px;
+      font-size: 0.75rem;
+      color: #b3b3b3;
+    }
+
+    footer a {
+      color: #b46ad9;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="back-link">
+      <a href="../index.html">← yumeito トップにもどる</a>
+    </div>
+    <div class="hero">
+      <!-- Google Play 用フィーチャー画像と同じものなど -->
+      <img src="images/feature-graphic.png" alt="ゆめいと屋さん フィーチャー画像" class="feature" />
+      <div class="app-title">ゆめいと屋さん</div>
+      <div class="app-subtitle">すきないろの“ゆめいと”をおって、じぶんだけの“ゆめおり”をつくろう。</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- アプリ紹介 -->
+    <section>
+      <h2>Androidアプリ「ゆめいと屋さん」について</h2>
+      <p>
+        すきないろの“いと”をえらんで、ゆめいろの“おりぬの”をつくる、  
+        ちいさな織物アプリです。
+      </p>
+      <p>
+        パステル、スイーツ、プリンセス、シティポップ…。  
+        たくさんの“ゆめいとパレット”から色をえらんで、  
+        タテいと・ヨコいとをおりかさねていくと、  
+        あなただけの“ゆめおり”ができあがります。
+      </p>
+      <p>
+        できあがった“ゆめおり”は、ギャラリーでながめたり、  
+        画像としてスマホに保存して、  
+        壁紙や、SNSの画像などに自由につかえます。
+      </p>
+
+      <!-- ストアへのリンク（URL を差し替え） -->
+      <a href="https://play.google.com/store/apps/details?id=【あなたのパッケージ】"
+         class="btn-store" target="_blank" rel="noopener noreferrer">
+        Google Play で見る
+      </a>
+      <p class="policy-note">
+        ※リンク先は、Google Play ストア上の「ゆめいと屋さん」アプリページです。
+      </p>
+    </section>
+
+    <!-- スクリーンショット一覧 -->
+    <section>
+      <h2>スクリーンショット</h2>
+      <p>Google Play に掲載しているのと同じ画像をこちらにもまとめています。</p>
+      <div class="screenshots">
+        <!-- パスやファイル名は実際のものに合わせて変更 -->
+        <img src="screenshots/screen01.png" alt="ゆめいと屋さん スクリーンショット1" />
+        <img src="screenshots/screen02.png" alt="ゆめいと屋さん スクリーンショット2" />
+        <img src="screenshots/screen03.png" alt="ゆめいと屋さん スクリーンショット3" />
+        <img src="screenshots/screen04.png" alt="ゆめいと屋さん スクリーンショット4" />
+        <img src="screenshots/screen05.png" alt="ゆめいと屋さん スクリーンショット5" />
+        <img src="screenshots/screen06.png" alt="ゆめいと屋さん スクリーンショット6" />
+        <img src="screenshots/screen07.png" alt="ゆめいと屋さん スクリーンショット7" />
+        <img src="screenshots/screen08.png" alt="ゆめいと屋さん スクリーンショット8" />
+      </div>
+    </section>
+
+    <!-- プライバシーポリシー -->
+    <section>
+      <h2>「ゆめいと屋さん」プライバシーポリシー</h2>
+
+      <!-- ここに、すでに作成済みのプライバシーポリシー本文をコピペして貼る -->
+      <!-- 例： <p>本アプリ「ゆめいと屋さん」は、開発者 yumeito（以下「当方」）が提供する…</p> -->
+
+      <p>
+        本アプリ「ゆめいと屋さん」は、開発者 <strong>yumeito</strong>（以下、「当方」といいます）が提供する、  
+        個人開発の Android アプリです。
+      </p>
+      <p>
+        本アプリは、ユーザーの皆さまのプライバシーを尊重することをたいせつにしており、  
+        端末内の個人情報や、外部サービスのアカウント情報などを取得・送信しない設計としています。
+      </p>
+
+      <h3>1. 取得する情報</h3>
+      <p>
+        本アプリは、ユーザーが作成した「ゆめおり」画像や設定情報などを、  
+        端末内のストレージにのみ保存します。  
+        これらのデータが、当方のサーバーや第三者に自動送信されることはありません。
+      </p>
+
+      <h3>2. 広告・解析ツールについて</h3>
+      <p>
+        現在のバージョンでは、広告配信およびアクセス解析ツールは使用していません。  
+        今後、仕様が変更される場合は、本ページおよびストアの更新履歴にてお知らせします。
+      </p>
+
+      <h3>3. お問い合わせ</h3>
+      <p>
+        アプリに関するご質問やご意見がありましたら、  
+        下記のメールアドレスまでご連絡ください。  
+        <br />
+        <strong>連絡先メールアドレス：</strong>  
+        <a href="mailto:yuu.yumeito@gmail.com">【あなたの公開用メールアドレス】</a>
+      </p>
+
+      <h3>4. プライバシーポリシーの変更</h3>
+      <p>
+        本プライバシーポリシーの内容は、必要に応じて改定されることがあります。  
+        重要な変更がある場合は、ストア上の説明文やアプリ更新情報でお知らせします。
+      </p>
+
+      <p class="policy-note">
+        制定日：2025年12月8日
+        開発者：yumeito（個人開発 / yuu）
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> yumeito / yuu  
+    ｜ <a href="../about.html">about / 運営情報</a>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
