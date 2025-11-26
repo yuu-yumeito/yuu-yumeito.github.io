@@ -192,13 +192,14 @@
       <p>Google Play に掲載しているのと同じ画像をこちらにもまとめています。</p>
       <div class="screenshots">
         <!-- パスやファイル名は実際のものに合わせて変更 -->
-        <img src="screenshots/screen01.png" alt="ゆめいと屋さん スクリーンショット8" />
+        <img src="img_yumeito-yasan/1764059173545.png" alt="ゆめいと屋さん スクリーンショット1" />
         <img src="img_yumeito-yasan/Screenshot_20251125-090127.png" alt="ゆめいと屋さん スクリーンショット2" />
         <img src="img_yumeito-yasan/Screenshot_20251125-172734.png" alt="ゆめいと屋さん スクリーンショット3" />
         <img src="img_yumeito-yasan/Screenshot_20251125-090339.png" alt="ゆめいと屋さん スクリーンショット4" />
         <img src="img_yumeito-yasan/Screenshot_20251125-090514.png" alt="ゆめいと屋さん スクリーンショット5" />
         <img src="Screenshot_20251125-090826.png" alt="ゆめいと屋さん スクリーンショット6" />
         <img src="img_yumeito-yasan/Screenshot_20251125-090339.png" alt="ゆめいと屋さん スクリーンショット7" />
+        <img src="img_yumeito-yasan/Yumeito_hibari_251125_090820.jpg" alt="ゆめいと屋さん スクリーンショット7" />
         <img src="img_yumeito-yasan/Screenshot_20251125-105044.png" alt="ゆめいと屋さん スクリーンショット8" />
         
       </div>
