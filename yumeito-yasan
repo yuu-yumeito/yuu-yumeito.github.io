@@ -150,7 +150,7 @@
     </div>
     <div class="hero">
       <!-- Google Play 用フィーチャー画像と同じものなど -->
-      <img src="images/feature-graphic.png" alt="ゆめいと屋さん フィーチャー画像" class="feature" />
+      <img src="img_yumeito-yasan/1763921916103.jpg" alt="ゆめいと屋さん フィーチャー画像" class="feature" />
       <div class="app-title">ゆめいと屋さん</div>
       <div class="app-subtitle">すきないろの“ゆめいと”をおって、じぶんだけの“ゆめおり”をつくろう。</div>
     </div>
@@ -177,7 +177,7 @@
       </p>
 
       <!-- ストアへのリンク（URL を差し替え） -->
-      <a href="https://play.google.com/store/apps/details?id=【あなたのパッケージ】"
+      <a href="https://play.google.com/apps【わたしのページ】"
          class="btn-store" target="_blank" rel="noopener noreferrer">
         Google Play で見る
       </a>
@@ -192,14 +192,15 @@
       <p>Google Play に掲載しているのと同じ画像をこちらにもまとめています。</p>
       <div class="screenshots">
         <!-- パスやファイル名は実際のものに合わせて変更 -->
-        <img src="screenshots/screen01.png" alt="ゆめいと屋さん スクリーンショット1" />
-        <img src="screenshots/screen02.png" alt="ゆめいと屋さん スクリーンショット2" />
-        <img src="screenshots/screen03.png" alt="ゆめいと屋さん スクリーンショット3" />
-        <img src="screenshots/screen04.png" alt="ゆめいと屋さん スクリーンショット4" />
-        <img src="screenshots/screen05.png" alt="ゆめいと屋さん スクリーンショット5" />
-        <img src="screenshots/screen06.png" alt="ゆめいと屋さん スクリーンショット6" />
-        <img src="screenshots/screen07.png" alt="ゆめいと屋さん スクリーンショット7" />
-        <img src="screenshots/screen08.png" alt="ゆめいと屋さん スクリーンショット8" />
+        <img src="screenshots/screen01.png" alt="ゆめいと屋さん スクリーンショット8" />
+        <img src="img_yumeito-yasan/Screenshot_20251125-090127.png" alt="ゆめいと屋さん スクリーンショット2" />
+        <img src="img_yumeito-yasan/Screenshot_20251125-172734.png" alt="ゆめいと屋さん スクリーンショット3" />
+        <img src="img_yumeito-yasan/Screenshot_20251125-090339.png" alt="ゆめいと屋さん スクリーンショット4" />
+        <img src="img_yumeito-yasan/Screenshot_20251125-090514.png" alt="ゆめいと屋さん スクリーンショット5" />
+        <img src="Screenshot_20251125-090826.png" alt="ゆめいと屋さん スクリーンショット6" />
+        <img src="img_yumeito-yasan/Screenshot_20251125-090339.png" alt="ゆめいと屋さん スクリーンショット7" />
+        <img src="img_yumeito-yasan/Screenshot_20251125-105044.png" alt="ゆめいと屋さん スクリーンショット8" />
+        
       </div>
     </section>
 
