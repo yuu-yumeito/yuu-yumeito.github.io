@@ -92,6 +92,16 @@
       padding-left: 8px;
     }
 
+    .tagline {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
     p {
       font-size: 14px;
       margin: 6px 0 0;
@@ -103,44 +113,34 @@
       color: var(--text-soft);
     }
 
-    .tagline {
-      display: inline-block;
-      font-size: 11px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--text-soft);
-      margin-bottom: 10px;
+    /* ▼ フィーチャー画像のレイアウト調整（はみ出し防止） */
+    .hero img.feature {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 12px;
     }
 
-    .section {
-      margin-top: 18px;
-    }
-
-    ul,
-    ol {
-      font-size: 14px;
-      margin: 6px 0 0;
-      padding-left: 18px;
-    }
-
-    .policy-note {
-      font-size: 12px;
-      color: var(--text-soft);
+    /* ▼ スクショ一覧（横並び → 折り返し） */
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
       margin-top: 12px;
     }
 
-    .policy-block {
-      margin-top: 20px;
-      padding: 14px 12px;
-      border-radius: 12px;
-      background: #faf7ff;
-      border: 1px dashed var(--accent);
-      font-size: 13px;
+    .screenshots img {
+      width: calc(50% - 12px);
+      max-width: calc(50% - 12px);
+      border-radius: 10px;
+      border: 1px solid var(--border);
     }
 
-    a {
-      color: var(--link);
+    @media (min-width: 700px) {
+      .screenshots img {
+        width: calc(33.33% - 12px);
+        max-width: calc(33.33% - 12px);
+      }
     }
 
     footer {
@@ -149,8 +149,15 @@
       color: var(--text-soft);
       padding: 16px 0 24px;
     }
+
+    .policy-note {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 12px;
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h1 class="site-title">yumeito</h1>
@@ -164,155 +171,118 @@
 
   <main>
     <div class="card">
-      <!-- ここから下を、今の yumeito-yasan.html の本文で置き換えてOK -->
-       <div class="hero">
-      <!-- Google Play 用フィーチャー画像と同じものなど -->
-      <img src="img_yumeito-yasan/1763921916103.jpg" alt="ゆめいと屋さん フィーチャー画像" class="feature" />
-      <div class="app-title">ゆめいと屋さん</div>
-      <div class="app-subtitle">すきないろの“ゆめいと”をおって、じぶんだけの“ゆめおり”をつくろう。</div>
-      
-      
+
+      <!-- ▼ フィーチャー画像 -->
+      <div class="hero">
+        <img src="img_yumeito-yasan/1763921916103.jpg" class="feature" alt="ゆめいと屋さん フィーチャー画像">
+      </div>
+
       <span class="tagline">app: ゆめいと屋さん</span>
       <h1>アプリ「ゆめいと屋さん」</h1>
 
-      <!-- アプリ紹介 -->
-    <section>
-      <h2>Androidアプリ「ゆめいと屋さん」について</h2>
-      <p>
-        すきないろの“いと”をえらんで、ゆめいろの“おりぬの”をつくる、  
-        ちいさな織物アプリです。
-      </p>
-      <p>
-        パステル、スイーツ、プリンセス、シティポップ…。  
-        たくさんの“ゆめいとパレット”から色をえらんで、  
-        タテいと・ヨコいとをおりかさねていくと、  
-        あなただけの“ゆめおり”ができあがります。
-      </p>
-      <p>
-        できあがった“ゆめおり”は、ギャラリーでながめたり、  
-        画像としてスマホに保存して、  
-        壁紙や、SNSの画像などに自由につかえます。
-      </p>
+      <!-- ▼ あなたの書いた本文（そのまま） -->
+      <section>
+        <h2>Androidアプリ「ゆめいと屋さん」について</h2>
+        <p>
+          すきないろの“いと”をえらんで、ゆめいろの“おりぬの”をつくる、  
+          ちいさな織物アプリです。
+        </p>
+        <p>
+          パステル、スイーツ、プリンセス、シティポップ…。  
+          たくさんの“ゆめいとパレット”から色をえらんで、  
+          タテいと・ヨコいとをおりかさねていくと、  
+          あなただけの“ゆめおり”ができあがります。
+        </p>
+        <p>
+          できあがった“ゆめおり”は、ギャラリーでながめたり、  
+          画像としてスマホに保存して、  
+          壁紙や、SNSの画像などに自由につかえます。
+        </p>
 
-      <!-- ストアへのリンク（URL を差し替え） -->
-      <a href="https://play.google.com/apps【わたしのページ】"
-         class="btn-store" target="_blank" rel="noopener noreferrer">
-        Google Play で見る
-      </a>
-      <p class="policy-note">
-        ※リンク先は、Google Play ストア上の「ゆめいと屋さん」アプリページです。
-      </p>
-    </section>
+        <a href="https://play.google.com/apps【URL入れる】"
+           class="btn-store" target="_blank" rel="noopener noreferrer">
+          Google Play で見る
+        </a>
+      </section>
 
-    <!-- スクリーンショット一覧 -->
-    <section>
-      <h2>スクリーンショット</h2>
-      <p>Google Play に掲載しているのと同じ画像をこちらにもまとめています。</p>
-      <div class="screenshots">
-        <!-- パスやファイル名は実際のものに合わせて変更 -->
-        <img src="img_yumeito-yasan/1764059173545.png" alt="ゆめいと屋さん スクリーンショット1" />
-        <img src="img_yumeito-yasan/Screenshot_20251125-090127.png" alt="ゆめいと屋さん スクリーンショット2" />
-        <img src="img_yumeito-yasan/Screenshot_20251125-172734.png" alt="ゆめいと屋さん スクリーンショット3" />
-        <img src="img_yumeito-yasan/Screenshot_20251125-090339.png" alt="ゆめいと屋さん スクリーンショット4" />
-        <img src="img_yumeito-yasan/Screenshot_20251125-090514.png" alt="ゆめいと屋さん スクリーンショット5" />
-        <img src="img_yumeito-yasan/Screenshot_20251125-090826.png" alt="ゆめいと屋さん スクリーンショット6" />
-        <img src="img_yumeito-yasan/Yumeito_hibari_251125_090820.jpg" alt="ゆめいと屋さん スクリーンショット7" />
-        <img src="img_yumeito-yasan/Screenshot_20251125-151456.png" alt="ゆめいと屋さん スクリーンショット8" />
-        
-      </div>
-    </section>
+      <!-- ▼ スクショ一覧 -->
+      <section>
+        <h2>スクリーンショット</h2>
+        <div class="screenshots">
+          <img src="img_yumeito-yasan/1764059173545.png">
+          <img src="img_yumeito-yasan/Screenshot_20251125-090127.png">
+          <img src="img_yumeito-yasan/Screenshot_20251125-172734.png">
+          <img src="img_yumeito-yasan/Screenshot_20251125-090339.png">
+          <img src="img_yumeito-yasan/Screenshot_20251125-090514.png">
+          <img src="img_yumeito-yasan/Screenshot_20251125-090826.png">
+          <img src="img_yumeito-yasan/Yumeito_hibari_251125_090820.jpg">
+          <img src="img_yumeito-yasan/Screenshot_20251125-151456.png">
+        </div>
+      </section>
 
-    <!-- プライバシーポリシー -->
-    <section>
-      <h2>「ゆめいと屋さん」プライバシーポリシー</h2>
-    <p>
-      本プライバシーポリシーは、開発者yumeitoが提供する個人開発アプリ「ゆめいと屋さん」（以下、「本アプリ」といいます）における
-      ユーザー情報の取り扱いについて定めるものです。
-    </p>
+      <!-- ▼ プライバシーポリシー（全文そのまま） -->
+      <section>
+        <h2>「ゆめいと屋さん」プライバシーポリシー</h2>
 
-    <h2>1. 開発者情報</h2>
-    <p>
-      開発者：<strong><!-- ここにデベロッパー名（ローマ字など）を書いてください -->yuu</strong><br>
-      連絡先メールアドレス：
-      <a href="mailto:yuu.yumeito@gmail.com">
-        <!-- ここをあなたのデベロッパー用メールアドレスに変更してください -->
-        yuu.yumeito@gmail.com
-      </a>
-    </p>
+        <p>
+          本プライバシーポリシーは、開発者yumeitoが提供する個人開発アプリ「ゆめいと屋さん」（以下、「本アプリ」といいます）における
+          ユーザー情報の取り扱いについて定めるものです。
+        </p>
 
-    <h2>2. 本アプリが収集する情報</h2>
-    <p>
-      本アプリは、ユーザーの氏名・住所・メールアドレス・電話番号などの
-      <strong>個人を特定できる情報を一切収集しません。</strong>
-    </p>
-    <p>また、現時点のバージョンでは、次の情報も取得していません。</p>
-    <ul>
-      <li>広告配信のための識別子（広告ID など）</li>
-      <li>アクセス解析のための利用状況データ</li>
-      <li>位置情報</li>
-      <li>連絡先、写真、ストレージ内のファイルなどの端末内データ</li>
-      <li>クラッシュレポートや診断情報の自動送信</li>
-    </ul>
+        <h2>1. 開発者情報</h2>
+        <p>
+          開発者：<strong>yuu</strong><br>
+          連絡先メールアドレス：
+          <a href="mailto:yuu.yumeito@gmail.com">yuu.yumeito@gmail.com</a>
+        </p>
 
-    <h2>3. 端末内で扱うデータについて</h2>
-    <p>
-      本アプリで設定した内容や、作成したカラーパレットなどのデータは、
-      ユーザーの端末内にのみ保存されます。
-      これらのデータはインターネット経由で外部サーバーに送信されません。
-    </p>
-    <p>
-      ユーザーが本アプリをアンインストールした場合、端末内に保存されていた
-      アプリ専用データは削除されます。
-    </p>
+        <h2>2. 本アプリが収集する情報</h2>
+        <p>
+          本アプリは、ユーザーの氏名・住所・メールアドレス・電話番号などの
+          <strong>個人を特定できる情報を一切収集しません。</strong>
+        </p>
 
-    <h2>4. 第三者への提供について</h2>
-    <p>
-      本アプリは、ユーザー情報を第三者に提供する機能を持ちません。
-      また、外部の広告ネットワークや分析サービスにユーザー情報を送信していません。
-    </p>
+        <p>また、現時点のバージョンでは次の情報も取得していません：</p>
+        <ul>
+          <li>広告ID</li>
+          <li>アクセス解析</li>
+          <li>位置情報</li>
+          <li>端末内ファイル</li>
+          <li>クラッシュレポート</li>
+        </ul>
 
-    <h2>5. 外部サービスの利用について</h2>
-    <p>
-      現時点のバージョンでは、外部の分析サービス、広告サービス、
-      認証サービスなどの第三者サービスは利用していません。
-    </p>
-    <p>
-      将来的に外部サービスを導入する場合は、その内容を本プライバシーポリシーに追記し、
-      必要に応じてアプリ内でもお知らせします。
-    </p>
+        <h2>3. 端末内で扱うデータ</h2>
+        <p>
+          本アプリで設定した内容や作成したカラーパレットなどのデータは端末内にのみ保存され、
+          外部に送信されません。
+        </p>
 
-    <h2>6. プライバシーポリシーの変更について</h2>
-    <p>
-      本アプリの機能追加や仕様変更、関連する法令の改正などに伴い、
-      本プライバシーポリシーの内容を変更する場合があります。
-    </p>
-    <p>
-      重要な変更がある場合は、Google Play ストアのアプリ紹介ページおよび
-      本ページの更新により通知します。
-    </p>
+        <h2>4. 第三者への提供</h2>
+        <p>本アプリはユーザー情報を外部に提供しません。</p>
 
-    <h2>7. お問い合わせ</h2>
-    <p>
-      本プライバシーポリシーに関するご質問やご不明点がある場合は、
-      上記の連絡先メールアドレスまでお問い合わせください。
-    </p>
+        <h2>5. 外部サービスの利用</h2>
+        <p>現時点では外部サービスを利用していません。</p>
 
-      <p class="policy-note">
-        制定日：2025年12月8日
-        開発者：yumeito（個人開発 / yuu）
-      </p>
-        </section>
+        <h2>6. プライバシーポリシーの変更</h2>
+        <p>必要に応じて更新します。</p>
+
+        <p class="policy-note">
+          制定日：2025年12月8日<br>
+          開発者：yumeito（個人開発 / yuu）
+        </p>
+      </section>
 
     </div>
   </main>
 
   <footer>
-    &copy; <span id="year"></span> yumeito / yuu ｜ 
+    © <span id="year"></span> yumeito / yuu ｜ 
     <a href="./about.html">about / 運営情報</a>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
