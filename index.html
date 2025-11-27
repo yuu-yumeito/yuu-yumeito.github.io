@@ -5,20 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>yumeito</title>
   <style>
+    :root {
+      --bg: #fff9fd;
+      --card: #ffffff;
+      --accent: #c9b7f5;
+      --accent-soft: #efe8ff;
+      --text-main: #5a5a5a;
+      --text-soft: #999999;
+      --border: #e3d8ff;
+      --link: #8a7be0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
       background: linear-gradient(135deg, #fff9fd, #fafaff);
-      color: #5a5a5a;
+      color: var(--text-main);
     }
 
-    header {
+    /* ▼ 上の「絵＋yumeito」のヒーロー部分（そのまま活かす） */
+    .hero-top {
       text-align: center;
       padding: 48px 16px 28px;
     }
 
-    .logo-img {
+    .hero-top .logo-img {
       width: 220px;
       max-width: 70vw;
       border-radius: 24px;
@@ -26,7 +42,7 @@
       margin-bottom: 18px;
     }
 
-    .site-title {
+    .hero-top .site-title {
       font-size: 2rem;
       letter-spacing: 0.15em;
       color: #b46ad9;
@@ -35,15 +51,54 @@
       text-transform: lowercase;
     }
 
-    .site-subtitle {
+    .hero-top .site-subtitle {
       font-size: 0.95rem;
-      color: #999;
+      color: var(--text-soft);
     }
 
+    /* ▼ 共通ヘッダー（about / yumeito-yasan と同じ世界観） */
+    .site-header {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to right, #ffe4f3, #f3f0ff);
+    }
+
+    .site-header-title {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .site-header-sub {
+      margin: 2px 0 0;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    nav {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    nav a {
+      margin-right: 14px;
+      text-decoration: none;
+      color: var(--link);
+      padding: 3px 6px;
+      border-radius: 999px;
+    }
+
+    nav a:hover {
+      background: var(--accent-soft);
+    }
+
+    /* ▼ メイン＋カードは共通っぽく */
     main {
       max-width: 960px;
       margin: 0 auto;
-      padding: 0 18px 48px;
+      padding: 24px 18px 48px;
       display: grid;
       gap: 28px;
     }
@@ -60,6 +115,7 @@
       padding: 24px 22px;
       box-shadow: 0 8px 22px rgba(200, 180, 240, 0.25);
       backdrop-filter: blur(6px);
+      border: 1px solid var(--border);
     }
 
     .card h2 {
@@ -112,20 +168,33 @@
 </head>
 <body>
 
-  <header>
-    <!-- トップで使いたい家のイラストなど -->
-    <!-- 例: images/yumeito-home.png に置く -->
-    <img src="img_yumeito-yasan/copilot_image_1764232039613.jpeg" alt="ゆめいと屋さんのような小さなお店" class="logo-img" />
+  <!-- ▼ いま気に入ってる「絵＋yumeito」のゾーン -->
+  <div class="hero-top">
+    <img src="img_yumeito-yasan/copilot_image_1764232039613.jpeg"
+         alt="ゆめいと屋さんのような小さなお店"
+         class="logo-img" />
     <div class="site-title">yumeito</div>
     <div class="site-subtitle">すこしふしぎで、すこしやさしいものづくり</div>
+  </div>
+
+  <!-- ▼ その下に共通ヘッダー -->
+  <header class="site-header">
+    <h1 class="site-header-title">yumeito</h1>
+    <p class="site-header-sub">ちいさな「ゆめいと工房」の公式サイト</p>
+    <nav>
+      <a href="index.html">トップ</a>
+      <a href="yumeito-yasan.html">アプリ「ゆめいと屋さん」</a>
+      <a href="about.html">about</a>
+    </nav>
   </header>
 
+  <!-- ▼ 下は共通風カードレイアウト -->
   <main>
     <!-- ゆめいと屋さん案内カード -->
     <section class="card">
       <h2>アプリ「ゆめいと屋さん」</h2>
       <p>
-        パステルいろの“いと”たちがならぶ、小さなおりもの屋さん。  
+        パステルいろの“いと”たちがならぶ、小さなおりもの屋さん。<br>
         すきないろの“ゆめいと”をあつめて、あなただけの“ゆめおり”を  
         つくれる、Android アプリです。
       </p>
@@ -154,11 +223,11 @@
   </main>
 
   <footer>
-    &copy; <span id="year"></span> yumeito / yuu  
+    &copy; <span id="year"></span> yumeito / yuu
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
-  </html>
+</html>
