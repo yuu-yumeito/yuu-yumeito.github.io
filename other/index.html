@@ -1,4 +1,246 @@
 <!DOCTYPE html>
-<html>
-<body>other</body>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>その他 ── yumeito</title>
+  <style>
+    :root {
+      --bg: #fff9fd;
+      --accent: #c9b7f5;
+      --accent-soft: #efe8ff;
+      --text-main: #5a5a5a;
+      --text-soft: #999999;
+      --border: #e3d8ff;
+      --link: #8a7be0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: linear-gradient(135deg, #fff9fd, #fafaff);
+      color: var(--text-main);
+    }
+
+    .site-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to right, #ffe4f3, #f3f0ff);
+    }
+
+    .site-header-title {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .site-header-sub {
+      margin: 2px 0 0;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    nav {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    nav a {
+      margin-right: 14px;
+      text-decoration: none;
+      color: var(--link);
+      padding: 3px 6px;
+      border-radius: 999px;
+    }
+
+    nav a:hover { background: var(--accent-soft); }
+    nav a.current { background: var(--accent-soft); font-weight: 600; }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 18px 64px;
+    }
+
+    .page-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #b46ad9;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .page-desc {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    /* カードグリッド */
+    .cards {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    /* カード */
+    .card {
+      background: #ffffffcc;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 22px rgba(200, 180, 240, 0.2);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(200, 180, 240, 0.35);
+    }
+
+    /* カード上部のアクセントゾーン（豆テーマ：ダークブラウン） */
+    .card-thumb {
+      background: #2e2318;
+      padding: 24px 24px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .card-thumb .icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .card-thumb .thumb-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.12em;
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    }
+
+    .card-thumb .thumb-sub {
+      font-size: 0.7rem;
+      color: #c8813a;
+      margin-top: 3px;
+      letter-spacing: 0.1em;
+    }
+
+    /* カード下部 */
+    .card-body {
+      padding: 18px 22px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-body p {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .card-body .tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .tag {
+      font-size: 0.68rem;
+      background: #f2e8d8;
+      color: #9a8870;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .card-footer {
+      padding: 12px 22px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--link);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 16px 32px;
+      font-size: 0.75rem;
+      color: #b3b3b3;
+    }
+
+    footer a {
+      color: #b46ad9;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <h1 class="site-header-title">yumeito</h1>
+    <p class="site-header-sub">ちいさな「ゆめいと工房」の公式サイト</p>
+    <nav>
+      <a href="../index.html">トップ</a>
+      <a href="../yumeito-yasan.html">アプリ「ゆめいと屋さん」</a>
+      <a href="../about.html">about</a>
+      <a href="index.html" class="current">その他</a>
+    </nav>
+  </header>
+
+  <main>
+    <p class="page-title">その他</p>
+    <p class="page-desc">ゆめいとの本筋とは少し外れた、雑多な習作たちを置いておく場所です。</p>
+
+    <div class="cards">
+
+      <!-- 今月の豆カード -->
+      <a href="mame.html" class="card">
+        <div class="card-thumb">
+          <div class="icon">🫘</div>
+          <div>
+            <div class="thumb-title">今月の豆</div>
+            <div class="thumb-sub">レシピアーカイブ ／ Vol.001〜055</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>架空の連載。全55号、Claudeが書いた。<br>「豆は逃げません。」</p>
+          <div class="tag-row">
+            <span class="tag">料理</span>
+            <span class="tag">豆</span>
+            <span class="tag">レシピ</span>
+            <span class="tag">アーカイブ</span>
+          </div>
+        </div>
+        <div class="card-footer">アーカイブを見る →</div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> yumeito / yuu
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
