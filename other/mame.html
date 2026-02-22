@@ -1,246 +1,523 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>その他 ── yumeito</title>
-  <style>
-    :root {
-      --bg: #fff9fd;
-      --accent: #c9b7f5;
-      --accent-soft: #efe8ff;
-      --text-main: #5a5a5a;
-      --text-soft: #999999;
-      --border: #e3d8ff;
-      --link: #8a7be0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今月の豆 ── レシピアーカイブ</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdf6ee; --sidebar-bg: #2e2318; --sidebar-text: #c4b49a;
+    --sidebar-hover: #3d3020; --accent: #c8813a; --text-main: #2a2018;
+    --text-sub: #9a8870; --border: #e8dece; --content-bg: #fffdf9; --tag-bg: #f2e8d8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+  header { background: var(--sidebar-bg); color: #fff; padding: 14px 28px; display: flex; align-items: baseline; gap: 16px; border-bottom: 2px solid var(--accent); flex-shrink: 0; }
+  header h1 { font-family: 'Shippori Mincho', serif; font-size: 1.15rem; letter-spacing: 0.25em; }
+  header span { font-size: 0.72rem; color: var(--sidebar-text); }
 
-    * { box-sizing: border-box; }
+  /* ── PC: 2ペイン ── */
+  .layout { display: flex; flex: 1; overflow: hidden; }
+  .sidebar { width: 300px; background: var(--sidebar-bg); display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+  .sidebar-search { padding: 12px 14px; border-bottom: 1px solid #3d3020; }
+  .sidebar-search input { width: 100%; background: #3d3020; border: none; border-radius: 4px; padding: 7px 10px; color: #e0d4c0; font-size: 0.78rem; font-family: inherit; outline: none; }
+  .sidebar-search input::placeholder { color: #665544; }
+  .article-list { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .article-list::-webkit-scrollbar { width: 4px; }
+  .article-list::-webkit-scrollbar-thumb { background: #4a3828; border-radius: 2px; }
+  .article-item { padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #3a2a1a; transition: background 0.15s; }
+  .article-item:hover { background: var(--sidebar-hover); }
+  .article-item.active { background: var(--sidebar-hover); border-left: 3px solid var(--accent); padding-left: 13px; }
+  .article-item .meta { font-size: 0.68rem; color: #7a6650; margin-bottom: 4px; }
+  .article-item .title { font-size: 0.82rem; color: var(--sidebar-text); line-height: 1.4; }
+  .article-item.active .title { color: #fff; }
+  .article-item .tags { margin-top: 5px; display: flex; gap: 4px; flex-wrap: wrap; }
+  .tag-small { font-size: 0.6rem; background: #4a3828; color: #b09878; padding: 2px 6px; border-radius: 2px; }
+  .content-area { flex: 1; overflow-y: auto; padding: 36px 48px 80px; }
+  .content-area::-webkit-scrollbar { width: 6px; }
+  .content-area::-webkit-scrollbar-thumb { background: #ddd0bc; border-radius: 3px; }
+  .placeholder { height: 100%; display: flex; align-items: center; justify-content: center; color: #c0ad95; font-size: 0.88rem; letter-spacing: 0.15em; font-family: 'Shippori Mincho', serif; }
+  .article-card { background: var(--content-bg); border-radius: 2px; padding: 40px 44px; max-width: 720px; box-shadow: 0 1px 8px rgba(80,50,20,0.07); animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .article-card .issue { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; }
+  .article-card h2 { font-family: 'Shippori Mincho', serif; font-size: 1.5rem; color: var(--text-main); line-height: 1.5; margin-bottom: 6px; }
+  .article-card .subtitle { font-size: 0.82rem; color: var(--text-sub); margin-bottom: 6px; font-style: italic; }
+  .article-card .date { font-size: 0.72rem; color: var(--text-sub); margin-bottom: 6px; }
+  .tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+  .tag { font-size: 0.68rem; background: var(--tag-bg); color: var(--text-sub); padding: 3px 9px; border-radius: 2px; }
+  .article-card .body { font-size: 0.9rem; line-height: 2.0; color: var(--text-main); white-space: pre-wrap; }
+  .attach-area { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .attach-label { font-size: 0.68rem; color: var(--text-sub); letter-spacing: 0.15em; margin-bottom: 10px; }
+  .attach-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .attach-link { display: inline-flex; align-items: center; gap: 7px; background: #faf4ea; border: 1px solid var(--border); border-radius: 3px; padding: 8px 14px; text-decoration: none; color: var(--text-main); font-size: 0.82rem; transition: all 0.15s; }
+  .attach-link:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .attach-link svg { width: 15px; height: 15px; flex-shrink: 0; }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
-      background: linear-gradient(135deg, #fff9fd, #fafaff);
-      color: var(--text-main);
-    }
+  /* ── スマホ: シングルカラム ── */
+  @media (max-width: 680px) {
+    body { overflow: auto; height: auto; }
+    .layout { flex-direction: column; overflow: visible; height: auto; }
 
-    .site-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(to right, #ffe4f3, #f3f0ff);
-    }
+    /* サイドバー＝リスト画面、コンテンツ＝記事画面を重ねてJS切り替え */
+    .sidebar { width: 100%; height: auto; overflow: visible; }
+    .article-list { overflow: visible; max-height: none; }
 
-    .site-header-title {
-      font-size: 18px;
-      margin: 0;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
+    .content-area { padding: 20px 18px 60px; overflow: visible; }
 
-    .site-header-sub {
-      margin: 2px 0 0;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
+    /* 記事カードのpadding縮小 */
+    .article-card { padding: 24px 20px; }
+    .article-card h2 { font-size: 1.2rem; }
 
-    nav {
-      margin-top: 8px;
-      font-size: 13px;
-    }
-
-    nav a {
-      margin-right: 14px;
-      text-decoration: none;
-      color: var(--link);
-      padding: 3px 6px;
-      border-radius: 999px;
-    }
-
-    nav a:hover { background: var(--accent-soft); }
-    nav a.current { background: var(--accent-soft); font-weight: 600; }
-
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 40px 18px 64px;
-    }
-
-    .page-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #b46ad9;
-      letter-spacing: 0.12em;
-      margin-bottom: 6px;
-    }
-
-    .page-desc {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-      margin-bottom: 36px;
-      line-height: 1.8;
-    }
-
-    /* カードグリッド */
-    .cards {
-      display: grid;
-      gap: 24px;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
-
-    /* カード */
-    .card {
-      background: #ffffffcc;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 22px rgba(200, 180, 240, 0.2);
-      backdrop-filter: blur(6px);
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px rgba(200, 180, 240, 0.35);
-    }
-
-    /* カード上部のアクセントゾーン（豆テーマ：ダークブラウン） */
-    .card-thumb {
-      background: #2e2318;
-      padding: 24px 24px 20px;
-      display: flex;
+    /* 戻るボタン（スマホのみ表示） */
+    .btn-back {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-    }
-
-    .card-thumb .icon {
-      font-size: 2rem;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
-    .card-thumb .thumb-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.12em;
-      font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
-    }
-
-    .card-thumb .thumb-sub {
-      font-size: 0.7rem;
-      color: #c8813a;
-      margin-top: 3px;
-      letter-spacing: 0.1em;
-    }
-
-    /* カード下部 */
-    .card-body {
-      padding: 18px 22px 22px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .card-body p {
-      font-size: 0.88rem;
-      line-height: 1.8;
-      margin: 0;
-      color: var(--text-main);
-    }
-
-    .card-body .tag-row {
-      display: flex;
       gap: 6px;
-      flex-wrap: wrap;
-      margin-top: auto;
-      padding-top: 6px;
-    }
-
-    .tag {
-      font-size: 0.68rem;
-      background: #f2e8d8;
-      color: #9a8870;
-      padding: 3px 9px;
-      border-radius: 999px;
-    }
-
-    .card-footer {
-      padding: 12px 22px;
-      border-top: 1px solid var(--border);
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      background: #3d3020;
+      color: #c4b49a;
+      border: none;
+      border-radius: 4px;
       font-size: 0.78rem;
-      color: var(--link);
-      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
       letter-spacing: 0.05em;
     }
 
-    footer {
-      text-align: center;
-      padding: 28px 16px 32px;
-      font-size: 0.75rem;
-      color: #b3b3b3;
-    }
+    /* スマホ時の画面切り替え */
+    .view-list .content-area { display: none; }
+    .view-article .sidebar { display: none; }
+    .view-article .content-area { display: block; }
+  }
 
-    footer a {
-      color: #b46ad9;
-      text-decoration: none;
-    }
-  </style>
+  /* PCではボタン非表示 */
+  @media (min-width: 681px) {
+    .btn-back { display: none; }
+  }
+</style>
 </head>
 <body>
-
-  <header class="site-header">
-    <h1 class="site-header-title">yumeito</h1>
-    <p class="site-header-sub">ちいさな「ゆめいと工房」の公式サイト</p>
-    <nav>
-      <a href="../index.html">トップ</a>
-      <a href="../yumeito-yasan.html">アプリ「ゆめいと屋さん」</a>
-      <a href="../about.html">about</a>
-      <a href="index.html" class="current">その他</a>
-    </nav>
-  </header>
-
-  <main>
-    <p class="page-title">その他</p>
-    <p class="page-desc">ゆめいとの本筋とは少し外れた、雑多な習作たちを置いておく場所です。</p>
-
-    <div class="cards">
-
-      <!-- 今月の豆カード -->
-      <a href="mame.html" class="card">
-        <div class="card-thumb">
-          <div class="icon">🫘</div>
-          <div>
-            <div class="thumb-title">今月の豆</div>
-            <div class="thumb-sub">レシピアーカイブ ／ Vol.001〜055</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>架空の連載。全55号、Claudeが書いた。<br>「豆は逃げません。」</p>
-          <div class="tag-row">
-            <span class="tag">料理</span>
-            <span class="tag">豆</span>
-            <span class="tag">レシピ</span>
-            <span class="tag">アーカイブ</span>
-          </div>
-        </div>
-        <div class="card-footer">アーカイブを見る →</div>
-      </a>
-
+<header>
+  <h1>今月の豆</h1>
+  <span id="totalLabel">レシピアーカイブ</span>
+  <nav style="margin-left:auto;font-size:0.72rem;">
+    <a href="index.html" style="color:#c8813a;text-decoration:none;opacity:0.8;">← その他へ戻る</a>
+  </nav>
+</header>
+<div class="layout view-list" id="layout">
+  <aside class="sidebar">
+    <div class="sidebar-search">
+      <input type="text" id="search" placeholder="タイトル・タグで絞り込む…" oninput="filterList(this.value)">
     </div>
+    <div class="article-list" id="articleList"></div>
+  </aside>
+  <main class="content-area" id="contentArea">
+    <button class="btn-back" onclick="backToList()">← 一覧に戻る</button>
+    <div id="contentInner"><div class="placeholder">← レシピを選んでください</div></div>
   </main>
+</div>
+<script>
+const ARTICLES = [
+  { id:1, date:"2023-09-01", issue:"Vol.001", title:"豚バラと白インゲン豆の煮込み", subtitle:"「豆が主役」と言い張るための煮込み", tags:["白インゲン豆","煮込み","秋冬向き","所要2時間"],
+    body:`今月の豆は白インゲン豆です。
 
-  <footer>
-    &copy; <span id="year"></span> yumeito / yuu
-  </footer>
+乾燥豆を買ってきた皆さん、まず前日に水に漬けてください。忘れた人は今号を読む権利がありません（冗談です。缶詰で代用できます。ただし風味は落ちます）。
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+■ 材料（4人分）
+
+白インゲン豆（乾燥）　200g ── 前日から水に漬けておく
+豚バラ肉（塊）　400g
+玉ねぎ　1個
+にんにく　4片
+ローズマリー　2枝
+トマト缶　1/2缶
+白ワイン　100ml
+塩・黒胡椒　適量
+オリーブオイル　大さじ2
+
+■ 作り方
+
+1. 豚バラを4cm角に切り、塩・黒胡椒を振って30分置く。肉から出た水分はキッチンペーパーで拭くこと。
+
+2. 厚手の鍋にオリーブオイルを熱し、豚を強火で全面に焼き色をつける。焦げ目を恐れないこと。この焦げ目が後の旨みになる。
+
+3. 豚を一度取り出し、同じ鍋で玉ねぎを中火でしんなりするまで炒める。10分はかかる。急がない。
+
+4. にんにくを加えてさらに2分。白ワインを入れてアルコールを飛ばす。
+
+5. 豚を戻し、白インゲン豆、トマト缶、ローズマリー、水200mlを加える。沸騰したらアクを取り、蓋をして弱火で90分。
+
+6. 豆が柔らかくなったら蓋を外し、10〜15分煮詰めてとろみをつける。塩で味を整えて完成。
+
+■ 今月のひとこと
+
+白インゲン豆は「地味な豆」と思われがちですが、存在感は控えめで汁を吸う天才です。主役を食材に譲れる人間みたいで、個人的に好きです。`,
+    attachments:[{name:"白インゲン豆の下処理チャート.pdf",url:"https://onedrive.example.com/fake/white_bean_prep.pdf"}] },
+
+  { id:2, date:"2023-10-06", issue:"Vol.002", title:"ひよこ豆のスパイス炒め（チャナマサラ風）", subtitle:"「本場と違う」と言われても気にしない版", tags:["ひよこ豆","インド風","スパイス","30分以内"],
+    body:`今月の豆はひよこ豆です。
+
+チャナマサラはインドの家庭料理で、地域・家庭によってレシピが全然違います。つまり「本場の味はこれだ」と主張する人全員が正しく、全員が間違っています。気楽に作りましょう。
+
+■ 材料（2〜3人分）
+
+ひよこ豆（缶詰）　400g / 玉ねぎ　1個 / トマト　1個 / にんにく・生姜　各適量
+クミンシード・コリアンダーパウダー・クミンパウダー・ターメリック・カイエンペッパー・ガラムマサラ・塩
+
+■ 作り方
+
+1. クミンシードを油で踊らせ、玉ねぎを15分炒める。にんにく・生姜を加えて2分、パウダースパイスを1分。
+
+2. トマトを崩しながら5分炒める。ひよこ豆を汁ごと加え、水を足して10分煮る。ガラムマサラを振り、塩で調整。
+
+■ 今月のひとこと
+
+スパイス炒めは「焦がさず、でも怖がらず」が肝要です。弱火でびくびく炒めていると、ただ蒸れるだけです。`,
+    attachments:[] },
+
+  { id:3, date:"2023-11-10", issue:"Vol.003", title:"黒豆の甘煮と、甘くない使い方", subtitle:"おせちだけに使うのはもったいない", tags:["黒豆","和食","甘煮","保存食"],
+    body:`今月の豆は黒豆です。
+
+■ 基本の甘煮（作りやすい量）
+
+黒豆（乾燥）200g・砂糖150g・醤油大さじ1.5・塩小さじ1/2・重曹小さじ1/4・水1リットル
+
+1. 水に調味料と重曹を溶かし、洗った黒豆を一晩漬ける。
+2. 漬け汁ごと鍋に入れ、沸騰直前で弱火にして蓋をする。絶対に強火で煮ないこと。皮が破れる。
+3. 弱火で2〜2.5時間。差し水しながら豆を汁に浸し続ける。
+4. 指で潰せる柔らかさになったら完成。
+
+■ 甘くない使い方
+
+黒豆ご飯、ヨーグルト乗せ、クリームチーズとクラッカー。「おせちの残り」感は一切なくなる。
+
+■ 今月のひとこと
+
+黒豆を煮ているときの台所のにおいは、他の豆では出ない独特の落ち着いたにおいがします。急かさず、静かに煮る食材です。`,
+    attachments:[{name:"豆の煮方早見表.pdf",url:"https://onedrive.example.com/fake/bean_cooking_guide.pdf"}] },
+
+  { id:4, date:"2024-01-19", issue:"Vol.004", title:"レンズ豆のスープ ── 前日の準備ゼロ版", subtitle:"水に漬けなくていい豆の話", tags:["レンズ豆","スープ","時短","一人暮らし向き"],
+    body:`今月の豆はレンズ豆です。
+
+洗ってそのまま鍋に入れていい。20〜30分で柔らかくなる。こんなに人に優しい豆はあまりない。
+
+■ 材料（2人分）
+
+レンズ豆（乾燥）100g・玉ねぎ・にんじん・セロリ・にんにく・オリーブオイル・クミン・ターメリック・ブロス700ml・レモン汁
+
+■ 作り方
+
+野菜を炒めてスパイスを加え、レンズ豆と水を入れて20〜25分。仕上げにレモン汁を搾る。このレモンを省かないこと。全体が締まる。
+
+■ 今月のひとこと
+
+レンズ豆はフランスでもインドでもエチオピアでも食べられている、地味に世界規模の豆です。懐の深さを見習いたい。`,
+    attachments:[] },
+
+  { id:5, date:"2024-03-08", issue:"Vol.005", title:"枝豆の塩茹で ── 「なぜかうまくいかない」を解決する", subtitle:"シンプルすぎて逆に難しい", tags:["枝豆","夏向き","塩茹で","基本技術"],
+    body:`今月の豆は枝豆です。「豆か？」と思った人、豆です。言い訳は以上です。
+
+■ 要点
+
+・茹で湯の塩分は1%（湯1リットルに塩10g）厳守
+・揉み込み用の塩で産毛を取り、洗い流さない
+・茹でたら水でさらさない。扇風機で急冷する
+
+水でさらすと塩が流れる。これが一番よくある失敗。
+
+■ 今月のひとこと
+
+旬の素材は、準備ができている人間にしか本当のうまさを見せません。`,
+    attachments:[{name:"豆の旬カレンダー.pdf",url:"https://onedrive.example.com/fake/bean_season_calendar.pdf"}] },
+
+  { id:6, date:"2024-04-05", issue:"Vol.006", title:"そら豆のリゾット ── 春だけ許される贅沢", subtitle:"旬が3週間しかない豆のために", tags:["そら豆","リゾット","春限定","イタリア風"],
+    body:`今月の豆はそら豆です。
+
+見かけたら即買いしてください。「今度でいいか」と思っているうちに消えます。豆に限った話ではありませんが。
+
+■ ポイント
+
+薄皮をむくこと。むいた豆の鮮やかな緑は、春の台所でしか見られない色です。
+リゾットのブロスはお玉1杯ずつ加えること。急いで全部入れない。この手間を惜しむとただの雑炊になる。
+
+■ 今月のひとこと
+
+そら豆は「空に向かって実をつける」から空豆と書きます。地面に向かって育つ大半の豆と逆を行く、少し変わった豆です。`,
+    attachments:[] },
+
+  { id:7, date:"2024-05-10", issue:"Vol.007", title:"大豆の水煮から作る、自家製豆腐", subtitle:"豆腐は豆か問題・前編", tags:["大豆","豆腐","自家製","週末向き"],
+    body:`今月の豆は大豆です。
+
+豆腐を作ります。「豆腐は豆か？」という問いに対する私の答えは「豆でできているから豆です」です。以後この問いには答えません。
+
+■ 工程の要点
+
+大豆を攪拌して「呉（ご）」を作り、煮て濾して豆乳にする。豆乳を70〜75℃でにがりを加えて固める。にがりは5ml厳守。温度計を使うこと。固まったら型で水切りして完成。
+
+おからは捨てない。別号で使います。
+
+■ 今月のひとこと
+
+豆腐を一から作ると、スーパーで買う豆腐の値段が信じられなくなります。それでも作る価値があるかどうかは、食べてみてから判断してください。`,
+    attachments:[{name:"にがりの分量早見表.pdf",url:"https://onedrive.example.com/fake/nigari_guide.pdf"}] },
+
+  { id:8, date:"2024-06-07", issue:"Vol.008", title:"金時豆の甘煮 ── 小豆との違いを言えますか", subtitle:"赤い豆は全部「あずき」ではない", tags:["金時豆","甘煮","和菓子","保存食"],
+    body:`今月の豆は金時豆です。
+
+金時豆を「でかい小豆」と思っている人が一定数います。違います。金時豆はインゲン豆の仲間で、小豆はアズキ属の別種です。
+
+■ 作り方のポイント
+
+砂糖は一度に全部入れない。豆が砂糖の浸透圧で縮む。半量を加えて15分煮てから残りを入れること。
+
+トーストにバターと一緒に乗せると和と洋の境界が溶ける。バニラアイスのトッピングにも意外と合います。
+
+■ 今月のひとこと
+
+「金時」という名は、坂田金時の赤ら顔に色が似ているからだという説があります。命名の由来がどこかロマンチックです。`,
+    attachments:[] },
+
+  { id:9, date:"2024-07-05", issue:"Vol.009", title:"ムング豆のもやし ── 自分で育てる話", subtitle:"食べる前に4日待てる人向け", tags:["ムング豆","もやし","自家栽培","夏向き"],
+    body:`今月の豆はムング豆です。ムング豆はもやしの原料です。今号は自分でもやしを育てます。
+
+■ 育て方
+
+広口瓶にムング豆を入れて一晩水に漬ける。翌朝水を捨て、逆さにして暗い場所へ。1日2〜3回水洗いして水を切る。4日続ける。5〜7cmになったら収穫。
+
+■ なぜ暗所か
+
+光に当てると緑化して苦みが出る。スーパーのもやしが白いのはそういう理由です。
+
+■ 今月のひとこと
+
+4日待つ間に「自分は食べ物を育てている」という感覚が生まれます。少しだけ食べ物への態度が変わります。`,
+    attachments:[] },
+
+  { id:10, date:"2024-08-02", issue:"Vol.010", title:"小豆と寒天の水ようかん", subtitle:"エアコンをつけながら食べるために", tags:["小豆","和菓子","水ようかん","夏向き"],
+    body:`今月の豆は小豆です。8月なので冷たいものを作ります。
+
+■ ポイント
+
+小豆は渋切りをしてから煮ること。粉寒天4gで水500mlが標準の固さ。砂糖を加えた瞬間に台所が和菓子屋のにおいになります。型は水で濡らしてから流し入れること。
+
+■ 今月のひとこと
+
+暑い台所で汗をかきながら、冷たいものを作っています。`,
+    attachments:[{name:"寒天と小豆の配合表.pdf",url:"https://onedrive.example.com/fake/yokan_ratio.pdf"}] },
+
+  { id:11, date:"2024-09-06", issue:"Vol.011", title:"花豆のバター煮 ── 見た目で得をする豆", subtitle:"大きくて美しい豆には理由がある", tags:["花豆","バター煮","秋冬向き","洋食"],
+    body:`今月の豆は花豆です。白地に赤紫の模様が入った、大きくて美しい豆です。
+
+■ 注意点
+
+前日から最低12時間水に漬けること。弱火で1.5〜2時間。花豆は大きいので時間がかかる。焦らない。バター・砂糖・醤油で仕上げる。
+
+■ 今月のひとこと
+
+花豆の模様は加熱すると薄れます。食べ物の美しさには、食べる前の時間が含まれています。`,
+    attachments:[] },
+
+  { id:12, date:"2024-10-04", issue:"Vol.012", title:"黒目豆のスープ ── アメリカ南部の話", subtitle:"「ソウルフード」という言葉を軽く使いたくないが", tags:["黒目豆","アメリカ南部","スープ","煮込み"],
+    body:`今月の豆は黒目豆（ブラックアイドピー）です。白い豆の中心に黒い点がある、目のような豆です。
+
+■ 今月のひとこと
+
+黒目豆はアフリカ、インド、アメリカ南部、ブラジルで食べられています。奴隷貿易の歴史とともに豆が移動した痕跡です。食べ物の来歴を知ると、食べる前の気持ちが少し変わります。`,
+    attachments:[] },
+
+  { id:13, date:"2024-11-01", issue:"Vol.013", title:"ピント豆のチリコンカン ── 「本格」を諦めない", subtitle:"テキサス人には怒られるかもしれない", tags:["ピント豆","チリコンカン","肉料理","アメリカ料理"],
+    body:`今月の豆はピント豆です。
+
+テキサスの本格派は「豆を入れない」と主張します。今号では入れます。テキサス人の皆さん、ご容赦ください。
+
+■ 今月のひとこと
+
+チリコンカンは「家にあるスパイスで作れる最も満足感の高い料理」のひとつです。豆がその深みを底から支えています。`,
+    attachments:[{name:"スパイス配合メモ.pdf",url:"https://onedrive.example.com/fake/chili_spice.pdf"}] },
+
+  { id:14, date:"2024-12-06", issue:"Vol.014", title:"フラジョレ豆のサラダ ── フランスの羊に合う豆", subtitle:"ジゴ・ダニョーを知らなくても作れます", tags:["フラジョレ豆","サラダ","フランス料理","冷菜"],
+    body:`今月の豆はフラジョレ豆です。淡い緑色をした小さなインゲン豆の一種で、上品な風味があります。
+
+ディジョンマスタード入りのドレッシングで和え、冷蔵庫で30分以上休ませる。この30分で豆にドレッシングがしみこむ。
+
+■ 今月のひとこと
+
+今年最後の号です。読んで作った人も、読んだだけの人も、来年もよろしくお願いします。豆は逃げません。`,
+    attachments:[] },
+
+  { id:15, date:"2025-01-17", issue:"Vol.015", title:"大豆の味噌汁 ── 出汁から逃げない", subtitle:"インスタント味噌汁に罪はないが", tags:["大豆","味噌汁","出汁","和食基本"],
+    body:`今月の豆は大豆です（2回目）。今号のテーマは「出汁から逃げない」です。
+
+■ 合わせ出汁
+
+昆布を30分水に浸けてから中火へ。泡が出たら昆布を取り出す。沸騰させると昆布が雑味を出す。火を止めて鰹節を加え、1〜2分おいて濾す。絞らない。
+
+■ 味噌汁
+
+出汁を温めて豆腐・わかめを加え、火を弱めて味噌を溶き入れる。味噌を煮立てない。香りが飛ぶ。
+
+■ 今月のひとこと
+
+毎朝味噌汁を飲む人は一年で300杯飲んでいます。その300杯の出発点が出汁の質です。`,
+    attachments:[] },
+
+  { id:16, date:"2025-02-07", issue:"Vol.016", title:"おからのガレット ── 「捨てない」の続き", subtitle:"Vol.007の約束を果たします", tags:["大豆","おから","フランス風","朝食向き"],
+    body:`今月の豆は、豆ではありません。おからです。
+
+Vol.007で「おからも捨てない。別号で使います」と予告しました。忘れていた人も多いと思いますが、こちらは覚えていました。
+
+■ ポイント
+
+おから・卵・薄力粉・塩・ハーブを混ぜた生地を、フライパンで薄く焼く。サワークリームとスモークサーモン、半熟卵とチーズなどのトッピングで。
+
+■ 今月のひとこと
+
+素材を無駄にしないことは、料理の礼儀のひとつだと思っています。`,
+    attachments:[] },
+
+  { id:17, date:"2025-03-07", issue:"Vol.017", title:"白花豆のポタージュ ── 「滑らかさ」の正体", subtitle:"ミキサーを信じる勇気について", tags:["白花豆","ポタージュ","スープ","春向き"],
+    body:`今月の豆は白花豆です。ミルキーな風味があり、ポタージュに向いています。
+
+■ ミキサーを使うときの注意
+
+熱いスープをミキサーにかける場合、蓋をしっかり押さえること。ふきんを重ねて蓋に当て、その上から手で押さえる。一度でも経験した人は次から必ずやります。経験しないうちにやってほしい。
+
+■ 今月のひとこと
+
+豆のポタージュはたんぱく質のコクがあって腹持ちがいい。これを飲んだ朝は昼まで空腹を感じません。`,
+    attachments:[] },
+
+  { id:18, date:"2025-04-04", issue:"Vol.018", title:"青大豆の冷や奴 ── 夏前に知っておきたい豆", subtitle:"緑色の豆腐という選択肢", tags:["青大豆","冷や奴","夏向き","シンプル"],
+    body:`今月の豆は青大豆です。熟しても緑色のままで、枝豆のような風味があります。
+
+冷や奴はシンプルな料理です。良い豆腐を買うだけで半分終わりです。
+
+■ 今月のひとこと
+
+料理はたまに引き算をする必要があります。冷や奴は、今の自分が素材の味を聞けているかどうかを確かめる料理です。`,
+    attachments:[] },
+
+  { id:19, date:"2025-05-02", issue:"Vol.019", title:"ルーピン豆のフムス ── ひよこ豆以外の選択肢", subtitle:"ひよこ豆が品切れだったあなたへ", tags:["ルーピン豆","フムス","地中海料理","おつまみ"],
+    body:`今月の豆はルーピン豆です。地中海沿岸でよく食べられ、たんぱく質含有量が非常に高い豆です。
+
+フムスはフードプロセッサーで2〜3分しっかり攪拌すること。市販と手作りの差がつく理由は新鮮なレモン汁と攪拌時間です。
+
+■ 今月のひとこと
+
+手を抜かないでください。`,
+    attachments:[{name:"タヒニの代替品リスト.pdf",url:"https://onedrive.example.com/fake/tahini_guide.pdf"}] },
+
+  { id:20, date:"2025-06-06", issue:"Vol.020", title:"インゲン豆のジェノベーゼ ── パスタではなく豆に絡める", subtitle:"バジルソースの使い方を拡張する", tags:["インゲン豆","ジェノベーゼ","イタリア風","夏向き"],
+    body:`今月の豆はさやいんげんです。ジェノベーゼ（バジルソース）を豆に絡めます。パスタにはかけません。
+
+バジルは夏のものです。今号を読んだ季節にバジルが手に入るなら、すぐ作ってください。急いだほうがいい。`,
+    attachments:[] },
+
+  { id:21, date:"2025-07-04", issue:"Vol.021", title:"大豆のおから炒り ── 「卯の花」という名前の謎", subtitle:"なぜ豆の副産物に花の名前がついているのか", tags:["大豆","おから","卯の花","和食"],
+    body:`今月の豆は、またおからです。
+
+「卯の花」という名前は、白い小花を咲かせるウツギ（空木）の別名が卯の花で、おからの白さがそれに似ているからだそうです。食材に詩的な名前をつける文化は好きです。
+
+ごぼう・にんじん・干し椎茸・油揚げとともに、だし・醤油・みりん・砂糖で炒りつける。冷蔵で3日、冷凍で1ヶ月。作り置きの優等生です。`,
+    attachments:[] },
+
+  { id:22, date:"2025-08-01", issue:"Vol.022", title:"豆乳の冷製スープ ── 火を使わない夏の料理", subtitle:"8月に鍋に火をつけるのをやめる提案", tags:["大豆","豆乳","冷製スープ","夏向き"],
+    body:`今月の豆は豆乳です。今号から「豆乳は豆か？」という問いを受け付けることにしました。豆です。
+
+今号は火を使いません。豆乳・白味噌・すりごま・にんにく・レモン汁を混ぜ、きゅうりとミニトマトを加えて冷やすだけ。
+
+手をかけることが料理の誠実さではありません。`,
+    attachments:[] },
+
+  { id:23, date:"2025-09-05", issue:"Vol.023", title:"納豆の和え麺 ── 「発酵」という名の時間", subtitle:"誰かが作り始めた瞬間に思いを馳せる", tags:["大豆","納豆","和え麺","発酵"],
+    body:`今月の豆は納豆です。今号では納豆を自分で作りません。スーパーで買います。良い食材を正しく使うことも料理です。
+
+納豆はよく混ぜること。糸を引くまで混ぜること。混ぜるほど旨みが増すと言われています（科学的根拠はあります）。
+
+発酵食品は時間が作るものです。その謙虚さが好きです。`,
+    attachments:[] },
+
+  { id:24, date:"2025-10-03", issue:"Vol.024", title:"黒豆のフェイジョアーダ ── ブラジルの豆料理", subtitle:"黒豆と豚肉の、長い煮込み", tags:["黒豆","ブラジル料理","煮込み","週末向き"],
+    body:`今月の豆は黒豆です（2回目）。ブラジルの国民食、フェイジョアーダです。
+
+オレンジを添えること。飾りではありません。豚の脂とオレンジの酸味が互いを引き立てます。省かないこと。
+
+おいしいものの背景には、いつもそれを作らざるを得なかった人がいます。`,
+    attachments:[{name:"フェイジョアーダの具材バリエーション.pdf",url:"https://onedrive.example.com/fake/feijoada_guide.pdf"}] },
+
+  { id:25, date:"2025-11-07", issue:"Vol.025", title:"豆腐の田楽 ── 味噌を焼く料理", subtitle:"焦げ目がついてから本物になる", tags:["大豆","豆腐","田楽","和食"],
+    body:`今月の豆は大豆です（3回目）。田楽です。室町時代から変わっていない料理というのは、完成されているということです。
+
+白味噌ベースの田楽味噌を塗り、表面が少し焦げるまで加熱する。この焦げ目が田楽の命です。
+
+味噌は大豆でできています。豆腐も大豆でできています。今号は大豆が大豆に乗った料理です。`,
+    attachments:[] },
+
+  { id:26, date:"2025-12-05", issue:"Vol.026", title:"大豆の白味噌ベシャメルグラタン ── 和と洋の境界が溶ける夜", subtitle:"クリスマスに豆を食べる人へ", tags:["大豆","豆腐","グラタン","洋食風"],
+    body:`今月の豆は大豆です（4回目）。今号は12月です。白味噌をベシャメルに加えると、乳製品だけでは出せないコクと甘みが加わります。
+
+今年の連載もそろそろ終わりです。今年最後の夜に自分で作ったものを食べることは、悪くないことだと思っています。来年もよろしくお願いします。豆は逃げません。`,
+    attachments:[] },
+
+  { id:27, date:"2026-01-09", issue:"Vol.027", title:"黒豆の甘煮リベンジ ── 失敗した人へ", subtitle:"なぜ皮が破れたのか、なぜ固いのか", tags:["黒豆","甘煮","失敗対策","和食"],
+    body:`今月の豆は黒豆です（3回目）。新年なので、また黒豆です。今号は失敗した人向けです。
+
+■ 失敗その1：皮が破れた → 火が強すぎ。湯面がわずかにゆらゆらする程度を保つこと。
+■ 失敗その2：固い → 水に漬ける時間が足りなかった。最低12時間、できれば18時間。
+■ 失敗その3：色が黒くならない → 重曹が足りない。小さじ1/4を守ること。
+
+料理は失敗から学ぶものです。今年の黒豆は昨年より上手に炊けるはずです。`,
+    attachments:[{name:"黒豆失敗診断チャート.pdf",url:"https://onedrive.example.com/fake/kuromame_debug.pdf"}] },
+
+  { id:28, date:"2026-02-06", issue:"Vol.028", title:"ひよこ豆のミネストローネ ── 野菜と豆の民主主義", subtitle:"主役を決めない料理の話", tags:["ひよこ豆","ミネストローネ","スープ","イタリア風"],
+    body:`今月の豆はひよこ豆です（2回目）。ミネストローネは「たっぷりのスープ」という意味です。決まったレシピがありません。要は「野菜と豆をたっぷり入れたスープ」です。
+
+豆さえ入れれば、それはミネストローネです。`,
+    attachments:[] },
+
+  { id:29, date:"2026-03-06", issue:"Vol.029", title:"豆苗のにんにく炒め ── 根っこを捨てる前に考えてほしいこと", subtitle:"再生栽培という選択肢", tags:["豆苗","炒め物","時短","再生栽培"],
+    body:`今月の豆は豆苗です。えんどう豆の若い芽です。豆です。
+
+豆苗は一度使い切ったあと、根っこを水に浸けると再生します。10日ほどでまた食べられます。これを知っているかどうかで、豆苗に対する態度が変わります。
+
+炒めすぎないこと。くたくたにすると別の植物になります。`,
+    attachments:[] },
+
+  { id:30, date:"2026-04-03", issue:"Vol.030", title:"スナップエンドウのバター醤油 ── シンプルの限界値", subtitle:"何も足してはいけない料理がある", tags:["スナップエンドウ","バター醤油","春向き","シンプル"],
+    body:`今月の豆はスナップエンドウです。
+
+バター15g・醤油小さじ2で炒めるだけです。本当にそれだけです。
+
+Vol.030です。30号になりました。まだ逃げていません。`,
+    attachments:[] },
+
+  { id:31, date:"2026-05-08", issue:"Vol.031", title:"白インゲン豆のカスレ ── 南フランスの時間泥棒", subtitle:"手間がかかるほど愛着がわく料理について", tags:["白インゲン豆","カスレ","フランス料理","週末向き"],
+    body:`今月の豆は白インゲン豆です（2回目）。カスレです。2日かけます。
+
+1日目に豆を下茹でし、肉を焼き、すべてを合わせて煮込んで一晩休ませる。2日目にパン粉をかけてオーブンへ。表面に張ったクルート（膜）を崩してまた待つ。この「崩しと待ち」がカスレの儀式です。
+
+週末に作ることを前提とした料理には、食べ終わったあとに「作った」という達成感が残ります。`,
+    attachments:[{name:"カスレの代替材料リスト.pdf",url:"https://onedrive.example.com/fake/cassoulet_guide.pdf"}] },
+
+  { id:32, date:"2026-06-05", issue:"Vol.032", title:"えんどう豆のご飯 ── 5月の台所", subtitle:"豆と米が一緒に炊ける奇跡", tags:["えんどう豆","炊き込みご飯","春向き","和食"],
+    body:`今月の豆はえんどう豆です。旬は4〜5月。スーパーに並ぶ期間は短い。急いだほうがいい。
+
+豆は米の上に散らして炊く。混ぜない。豆は上に乗せたまま炊く。混ぜると豆が沈んで色が悪くなる。
+
+豆ご飯は子どもの頃から好きです。春の台所のにおいがする料理です。`,
+    attachments:[] },
+
+  { id:33, date:"2026-07-03", issue:"Vol.033", title:"大豆ミートのキーマカレー ── 「肉の代わり」という考え方を疑う", subtitle:"代替品ではなく、別の素材として", tags:["大豆ミート","キーマカレー","スパイス","ベジタリアン向き"],
+    body:`今月の豆は大豆ミートです。
+
+「肉の代わり」という紹介のされ方をすることが多いですが、私はその説明が少し好きではありません。代わりとして使うと、常に「本物の肉より劣る」という基準で評価されることになる。それは不公平です。
+
+代替品という言葉は便利ですが、何かの劣化版という意味を含んでいます。`,
+    attachments:[] },
+
+  { id:34, date:"2026-08-07", issue:"Vol.034", title:"緑豆の春雨スープ ── 透明な食材の話", subtitle:"見えなくなっても、そこにある", tags:["緑豆","春雨","スープ","アジア料理"],
+    body:`今月の豆は緑豆（ムング豆）です（2回目）。春雨は緑豆のでんぷんから作られています。
+
+透明になっても存在している。見えなくなることと、なくなることは違い
