@@ -16,8 +16,6 @@
   header { background: var(--sidebar-bg); color: #fff; padding: 14px 28px; display: flex; align-items: baseline; gap: 16px; border-bottom: 2px solid var(--accent); flex-shrink: 0; }
   header h1 { font-family: 'Shippori Mincho', serif; font-size: 1.15rem; letter-spacing: 0.25em; }
   header span { font-size: 0.72rem; color: var(--sidebar-text); }
-
-  /* ── PC: 2ペイン ── */
   .layout { display: flex; flex: 1; overflow: hidden; }
   .sidebar { width: 300px; background: var(--sidebar-bg); display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
   .sidebar-search { padding: 12px 14px; border-bottom: 1px solid #3d3020; }
@@ -53,60 +51,14 @@
   .attach-link { display: inline-flex; align-items: center; gap: 7px; background: #faf4ea; border: 1px solid var(--border); border-radius: 3px; padding: 8px 14px; text-decoration: none; color: var(--text-main); font-size: 0.82rem; transition: all 0.15s; }
   .attach-link:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
   .attach-link svg { width: 15px; height: 15px; flex-shrink: 0; }
-
-  /* ── スマホ: シングルカラム ── */
-  @media (max-width: 680px) {
-    body { overflow: auto; height: auto; }
-    .layout { flex-direction: column; overflow: visible; height: auto; }
-
-    /* サイドバー＝リスト画面、コンテンツ＝記事画面を重ねてJS切り替え */
-    .sidebar { width: 100%; height: auto; overflow: visible; }
-    .article-list { overflow: visible; max-height: none; }
-
-    .content-area { padding: 20px 18px 60px; overflow: visible; }
-
-    /* 記事カードのpadding縮小 */
-    .article-card { padding: 24px 20px; }
-    .article-card h2 { font-size: 1.2rem; }
-
-    /* 戻るボタン（スマホのみ表示） */
-    .btn-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 20px;
-      padding: 8px 14px;
-      background: #3d3020;
-      color: #c4b49a;
-      border: none;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-family: inherit;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-    }
-
-    /* スマホ時の画面切り替え */
-    .view-list .content-area { display: none; }
-    .view-article .sidebar { display: none; }
-    .view-article .content-area { display: block; }
-  }
-
-  /* PCではボタン非表示 */
-  @media (min-width: 681px) {
-    .btn-back { display: none; }
-  }
 </style>
 </head>
 <body>
 <header>
   <h1>今月の豆</h1>
   <span id="totalLabel">レシピアーカイブ</span>
-  <nav style="margin-left:auto;font-size:0.72rem;">
-    <a href="index.html" style="color:#c8813a;text-decoration:none;opacity:0.8;">← その他へ戻る</a>
-  </nav>
 </header>
-<div class="layout view-list" id="layout">
+<div class="layout">
   <aside class="sidebar">
     <div class="sidebar-search">
       <input type="text" id="search" placeholder="タイトル・タグで絞り込む…" oninput="filterList(this.value)">
@@ -114,8 +66,7 @@
     <div class="article-list" id="articleList"></div>
   </aside>
   <main class="content-area" id="contentArea">
-    <button class="btn-back" onclick="backToList()">← 一覧に戻る</button>
-    <div id="contentInner"><div class="placeholder">← レシピを選んでください</div></div>
+    <div class="placeholder">← レシピを選んでください</div>
   </main>
 </div>
 <script>
@@ -518,6 +469,69 @@ Vol.030です。30号になりました。まだ逃げていません。`,
     attachments:[] },
 
   { id:34, date:"2026-08-07", issue:"Vol.034", title:"緑豆の春雨スープ ── 透明な食材の話", subtitle:"見えなくなっても、そこにある", tags:["緑豆","春雨","スープ","アジア料理"],
-    body:`今月の豆は緑豆（ムング豆）です（2回目）。春雨は緑豆のでんぷんから作られています。
+    body:`今月の豆は緑豆（ムング豆）です（2回目）。
 
-透明になっても存在している。見えなくなることと、なくなることは違い
+Vol.009ではもやしを育てました。今号は春雨を使います。春雨は緑豆のでんぷんから作られています。緑豆はもやしにも春雨にもなれる、変身上手な豆です。
+
+春雨は透明です。スープに入れると存在感が薄れます。でも食べるとそこにある。透明な食材というのは、脇役として非常に優秀です。
+
+■ 材料（2人分）
+
+春雨（乾燥）　50g ── 水で戻しておく
+豚薄切り肉（または鶏むね肉）　150g
+きくらげ（乾燥）　5g ── 水で戻してスライス
+にんじん　1/3本（千切り）
+長ねぎ　1/2本（斜め切り）
+生姜　1片（薄切り）
+チキンブロス（または水）　700ml
+醤油　大さじ1.5
+みりん　大さじ1
+ごま油　小さじ1
+塩・白胡椒
+水溶き片栗粉（片栗粉大さじ1＋水大さじ2）
+
+■ 作り方
+
+1. 鍋にブロスと生姜を入れて中火で温める。沸騰したら豚肉をほぐしながら加え、アクを取る。
+
+2. にんじん・きくらげを加えて3分。
+
+3. 醤油・みりん・塩・白胡椒で調味する。
+
+4. 水を切った春雨を加えて2分。
+
+5. 水溶き片栗粉を加えてとろみをつける。ねぎを加えてごま油を垂らす。
+
+■ きくらげについて
+
+きくらげは木耳と書きます。木に生える耳の形をしているからです。命名の感性がおからの「卯の花」と似ています。食材の名前には、誰かが見た形や色の記憶が入っています。
+
+■ 片栗粉のとろみについて
+
+片栗粉はじゃがいものでんぷんです。本来の「片栗粉」はカタクリという植物の根から作られますが、現在市販されているものはほぼじゃがいも由来です。名前と中身が変わっていく食材のひとつです。
+
+■ 今月のひとこと
+
+透明になっても存在している。見えなくなることと、なくなることは違います。春雨はそのことを静かに教えてくれます。少し大げさかもしれませんが、料理からそういうことを考えるのが好きです。`,
+    attachments:[] },
+
+  { id:35, date:"2026-09-04", issue:"Vol.035", title:"豆の話 ── 3年目に入るにあたって", subtitle:"連載開始から丸2年。読者へ", tags:["総集編","エッセイ","連載3年目","豆全般"],
+    body:`今月は、レシピを書きません。
+
+Vol.001から35号、2年間続けてきました。3年目に入ります。
+
+2年間で20種類以上の豆を扱いました。大豆は6回登場しました。大豆はそれだけのことができる豆です。
+
+2年分の号を見返すと、自分がくり返し言っていることがあります。「急がない」「混ぜすぎない」「省かない」「捨てない」「比べない」。料理の注意点として書いていましたが、読み返すと料理以外のことにも聞こえます。
+
+まだ書いていない豆があります。テパリー豆、バンバラ豆、アヤコテ豆。名前を聞いたことがない人が大半だと思います。聞いたことのない豆があるということは、食べたことのない味があるということです。それはいいことです。
+
+3年目もよろしくお願いします。
+
+── 豆`,
+    attachments:[] },
+
+  { id:36, date:"2026-10-02", issue:"Vol.036", title:"節分の大豆 ── 炒り豆の正しい食べ方、余った豆の話", subtitle:"「いりこと甘辛く」は正解です。でも少しだけ補足させてください", tags:["大豆","炒り豆","節分","和食"],
+    body:`今月の豆は炒り大豆です。
+
+節分が
